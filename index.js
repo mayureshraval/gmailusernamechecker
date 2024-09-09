@@ -1,5 +1,6 @@
 import express from 'express';
 import axios from 'axios';
+import ApiKey from './apiKey.mjs';
 const app = express();
 const port = 3000;
 
@@ -16,7 +17,7 @@ app.post('/', async (req, res) => {
     const config = {
         headers: {
             "X-Rapidapi-Host": "gmail-username-availability-check.p.rapidapi.com",
-            "x-rapidapi-key": "2b368bb86emsh3223da753b27282p1b1da7jsn0498d88f585d",
+            "x-rapidapi-key": ApiKey,
             "Content-Type": 'application/json'
         }
     }
