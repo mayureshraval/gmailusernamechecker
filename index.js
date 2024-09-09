@@ -1,23 +1,38 @@
 import express from 'express';
-
+import axios from 'axios';
 const app = express();
 const port = 3000;
 
 app.use(express.static('public'));
 
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req,res)=>{
+app.get('/', (req, res) => {
     // res.send('App running!');
     res.render('index.ejs')
 })
-app.post('/', (req,res)=>{
+app.post('/', async (req, res) => {
     // res.send('App running!');
-
+    const config = {
+        headers: {
+            "X-Rapidapi-Host": "gmail-username-availability-check.p.rapidapi.com",
+            "x-rapidapi-key": "2b368bb86emsh3223da753b27282p1b1da7jsn0498d88f585d",
+            "Content-Type": 'application/json'
+        }
+    }
+    const url = 'https://gmail-username-availability-check.p.rapidapi.com/gusername';
     let username = req.body.username;
-    res.render('index.ejs', {username: username});
+    try {
+        let result = await axios.post(url, { username: username }, config)
+        console.log(result); 
+        res.render('index.ejs', { response: JSON.stringify(result.data.message), username: username });
+    } catch (error) {
+        console.log(error.message);
+        res.render('index.ejs', { response: error.message});
+    }
+
 })
 
-app.listen(port, ()=>{
-    console.log('Example server running on ', port); 
+app.listen(port, () => {
+    console.log('Example server running on ', port);
 })
