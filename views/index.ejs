@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gmail Username Checker</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="../public/style.css"> -->
+</head>
+<body>
+    <div class="container">
+        <form action="/" method="POST">
+            <label for="usernameInput">Enter Username to check </label>
+            <input type="text" name="username" id="username">
+            <input type="submit" name="submitBtn" id="submitBtn" value="Submit">
+        </form>
+    </div>
+    <% if(locals.username){ %> 
+        <div class="hiddenBox">
+            <p> <%= username %></p>
+        </div>
+    <% } %> 
+  
+</body>
+</html>
